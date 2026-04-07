@@ -1,0 +1,18 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-07T21:27:22.122810Z",
+  "depends_on": [
+    "fn-2-szr.2",
+    "fn-2-szr.3",
+    "fn-2-szr.4"
+  ],
+  "epic": "fn-2-szr",
+  "id": "fn-2-szr.5",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-2-szr.5.md",
+  "status": "todo",
+  "title": "Event bus, structured logging, and admin routes",
+  "updated_at": "2026-04-07T21:29:15.267210Z"
+}

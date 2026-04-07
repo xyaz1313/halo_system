@@ -1,0 +1,16 @@
+{
+  "assignee": null,
+  "claim_note": "",
+  "claimed_at": null,
+  "created_at": "2026-04-07T21:27:21.855748Z",
+  "depends_on": [
+    "fn-2-szr.1"
+  ],
+  "epic": "fn-2-szr",
+  "id": "fn-2-szr.2",
+  "priority": null,
+  "spec_path": ".flow/tasks/fn-2-szr.2.md",
+  "status": "todo",
+  "title": "Account model, service functions, and API routes",
+  "updated_at": "2026-04-07T21:29:14.637476Z"
+}
