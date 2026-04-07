@@ -58,6 +58,7 @@ A system designed to track and assist dementia patients.
   - `events/` — event bus / message routing between subsystems
   - `rules/` — deterministic routing logic (e.g., MoZo threshold → alert)
   - `notifications/` — email-based communication with caregivers/patients. Two modes: one-way alerts (e.g., MoZo departure) and interactive confirmations (e.g., "approve this scheduling change?")
+  - `logging/` — audit and historical record of system activity. Structured JSON logs. MoZo signal history also stored in DB for queries.
 - **Role**: Single source of truth. MoZo, transcription, and the executive agent all read/write through backend APIs. Calendars are added and synced here.
 
 ## Data Models
@@ -144,7 +145,8 @@ halo_system/
 │   ├── devices/
 │   ├── events/
 │   ├── rules/
-│   └── notifications/
+│   ├── notifications/
+│   └── logging/
 ├── executive/
 │   ├── agent/
 │   └── actions/
