@@ -5,8 +5,10 @@ A system designed to track and assist dementia patients.
 ## Components
 
 ### 1. Scheduling / Calendar System
-- **Repo**: `halo_scheduling_system`
-- **Purpose**: Calendar and scheduling management for patient care
+- **Managed by**: `backend/` (calendar sync and storage)
+- **Prior work**: `halo_scheduling_system` repo
+- **Purpose**: Calendar sync and scheduling management for patient care
+- **How it works**: The backend maintains an internal calendar store and syncs with external calendars (Google Calendar, etc.) that caregivers can add. All scheduling data flows through the backend API.
 
 ### 2. MoZo (Tag-Anchor Proximity System)
 - **Directory**: `mozo/`
@@ -37,12 +39,14 @@ A system designed to track and assist dementia patients.
 
 ### 5. Backend
 - **Directory**: `backend/`
-- **Purpose**: Core infrastructure — APIs, database, event routing, deterministic rules
+- **Purpose**: Central hub — all subsystems communicate through the backend. Owns APIs, database, event routing, calendar sync, and deterministic rules.
 - **Submodules**:
   - `api/` — REST/WebSocket endpoints
   - `db/` — models and migrations
   - `events/` — event bus / message routing between subsystems
   - `rules/` — deterministic routing logic (e.g., MoZo threshold → alert)
+  - `calendars/` — external calendar sync (Google Calendar, etc.), internal calendar store
+- **Role**: Single source of truth. MoZo, transcription, and the executive agent all read/write through backend APIs. Calendars are added and synced here.
 
 ## Repository Structure
 
@@ -52,6 +56,7 @@ halo_system/
 ├── docker-compose.yml
 ├── backend/
 │   ├── api/
+│   ├── calendars/
 │   ├── db/
 │   ├── events/
 │   └── rules/
