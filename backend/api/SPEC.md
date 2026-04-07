@@ -77,6 +77,21 @@ Base path: `/api/v1`
 
 ---
 
+## Admin (Frontend Data)
+
+Simple dump routes for the frontend table browser. No filtering, no pagination — just return everything.
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/admin/accounts` | All accounts |
+| `GET` | `/admin/anchors` | All anchors |
+| `GET` | `/admin/tags` | All tags |
+| `GET` | `/admin/associations` | All anchor-tag associations |
+| `GET` | `/admin/calendars` | All calendars |
+| `GET` | `/admin/preferences` | All notification preferences |
+
+---
+
 ## Notes
 
 - FastAPI auto-generates OpenAPI/Swagger docs at `/docs`

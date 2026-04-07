@@ -9,26 +9,32 @@ A simple way to view and browse all backend tables without needing to query the 
 ## Tech
 
 - **React** or **plain HTML + JS** — TBD, whatever gets us there fastest
-- Talks to the backend REST API (`/api/v1/...`)
+- Talks to backend admin routes (`/api/v1/admin/...`)
 
-## Pages
+## Layout
 
-| Page | Route | Description |
+- **Navbar** at the top, persistent across all pages
+  - Links: Accounts | Anchors | Tags | Associations | Calendars | Preferences
+- **Content area** below the navbar
+
+## Routes & Pages
+
+| Frontend Route | Backend Route | Description |
 |---|---|---|
-| Home | `/` | Links to each table browser |
-| Accounts | `/accounts` | List all accounts, click to view detail |
-| Account Detail | `/accounts/{id}` | Show account fields + linked tags, anchors, calendars, preferences |
-| Anchors | `/anchors` | List all anchors, show visibility, status |
-| Tags | `/tags` | List all tags, show account, status |
-| Calendars | `/calendars` | List all calendars, show sync status |
-| Notifications | `/notifications` | List all notification preferences |
+| `/` | — | Home / redirect to `/accounts` |
+| `/accounts` | `GET /api/v1/admin/accounts` | Table of all accounts |
+| `/anchors` | `GET /api/v1/admin/anchors` | Table of all anchors |
+| `/tags` | `GET /api/v1/admin/tags` | Table of all tags |
+| `/associations` | `GET /api/v1/admin/associations` | Table of all anchor-tag associations |
+| `/calendars` | `GET /api/v1/admin/calendars` | Table of all calendars |
+| `/preferences` | `GET /api/v1/admin/preferences` | Table of all notification preferences |
 
-## Features
+## Page Behavior
 
-- Table view for each model (sortable columns)
-- Click a row to see full detail
-- Detail pages show related records (e.g., account detail shows its tags, anchors, calendars)
-- No create/edit/delete from the UI for now — read-only browser
+- Each page fetches its table data on load from the corresponding admin route
+- Renders as a simple table — one column per field, one row per record
+- No create/edit/delete — read-only
+- No pagination or filtering for now
 
 ## Notes
 
