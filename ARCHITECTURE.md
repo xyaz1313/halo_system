@@ -43,10 +43,13 @@ A system designed to track and assist dementia patients.
 - **Purpose**: Central hub — all subsystems communicate through the backend. Owns APIs, database, event routing, calendar sync, and deterministic rules.
 - **Submodules**:
   - `api/` — REST/WebSocket endpoints
+  - `core/` — base abstractions, shared backend patterns, service/repository interfaces
   - `db/` — models and migrations
+  - `calendars/` — external calendar sync (Google Calendar, etc.), internal calendar store
+  - `devices/` — MoZo anchor/tag registry, associations, signal history
   - `events/` — event bus / message routing between subsystems
   - `rules/` — deterministic routing logic (e.g., MoZo threshold → alert)
-  - `calendars/` — external calendar sync (Google Calendar, etc.), internal calendar store
+  - `notifications/` — alert delivery to caregivers (push, SMS, email — TBD)
 - **Role**: Single source of truth. MoZo, transcription, and the executive agent all read/write through backend APIs. Calendars are added and synced here.
 
 ## Repository Structure
@@ -57,10 +60,13 @@ halo_system/
 ├── docker-compose.yml
 ├── backend/
 │   ├── api/
-│   ├── calendars/
+│   ├── core/
 │   ├── db/
+│   ├── calendars/
+│   ├── devices/
 │   ├── events/
-│   └── rules/
+│   ├── rules/
+│   └── notifications/
 ├── executive/
 │   ├── agent/
 │   └── actions/
