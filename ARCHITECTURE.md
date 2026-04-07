@@ -4,11 +4,12 @@ A system designed to track and assist dementia patients.
 
 ## Components
 
-### 1. Scheduling / Calendar System
-- **Managed by**: `backend/` (calendar sync and storage)
+### 1. Scheduling Tool
+- **Directory**: `scheduling/`
 - **Prior work**: `halo_scheduling_system` repo
-- **Purpose**: Calendar sync and scheduling management for patient care
-- **How it works**: The backend maintains an internal calendar store and syncs with external calendars (Google Calendar, etc.) that caregivers can add. All scheduling data flows through the backend API.
+- **Purpose**: Scheduling logic and decision-making tool used by the executive agent
+- **How it works**: The executive agent calls into the scheduling tool to make decisions about patient care timing — e.g., when to schedule activities, resolve conflicts, suggest rescheduling. Reads calendar data from the backend, returns scheduling decisions.
+- **Relationship**: Consumes calendar data from `backend/calendars/`, used by `executive/`
 
 ### 2. MoZo (Tag-Anchor Proximity System)
 - **Directory**: `mozo/`
