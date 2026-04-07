@@ -60,6 +60,75 @@ A system designed to track and assist dementia patients.
   - `notifications/` — email-based communication with caregivers/patients. Two modes: one-way alerts (e.g., MoZo departure) and interactive confirmations (e.g., "approve this scheduling change?")
 - **Role**: Single source of truth. MoZo, transcription, and the executive agent all read/write through backend APIs. Calendars are added and synced here.
 
+## Data Models
+
+### Account
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID (PK) | |
+| `email` | string | Account login / primary contact |
+| `patient_name` | string | |
+| `patient_age` | int | |
+| `patient_diagnosis_stage` | string | |
+| `patient_notes` | text | |
+| `caretaker_name` | string (optional) | |
+| `caretaker_email` | string (optional) | |
+| `created_at` | timestamp | |
+| `updated_at` | timestamp | |
+
+### Anchor
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID (PK) | |
+| `label` | string | Friendly name (e.g., "Kitchen", "Front Door") |
+| `visibility` | enum | `public` or `private` |
+| `owner_account_id` | FK → Account (nullable) | Required if private, null if public |
+| `signal_threshold` | float | RSSI cutoff for departure detection |
+| `status` | enum | `active` / `inactive` |
+| `created_at` | timestamp | |
+| `updated_at` | timestamp | |
+
+### Tag
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID (PK) | |
+| `account_id` | FK → Account | |
+| `label` | string (optional) | Friendly name |
+| `status` | enum | `active` / `inactive` |
+| `created_at` | timestamp | |
+| `updated_at` | timestamp | |
+
+### AnchorTagAssociation
+| Field | Type | Notes |
+|---|---|---|
+| `anchor_id` | FK → Anchor | Composite PK |
+| `tag_id` | FK → Tag | Composite PK |
+| `created_at` | timestamp | |
+
+### Calendar
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID (PK) | |
+| `account_id` | FK → Account | |
+| `provider` | string | e.g., "google" |
+| `external_calendar_id` | string | ID from the provider |
+| `sync_status` | enum | `syncing` / `synced` / `error` |
+| `last_synced_at` | timestamp (nullable) | |
+| `created_at` | timestamp | |
+| `updated_at` | timestamp | |
+
+### NotificationPreference
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID (PK) | |
+| `account_id` | FK → Account | |
+| `alert_email` | string | Where to send alerts |
+| `alert_types` | list/enum | Which events trigger emails |
+| `created_at` | timestamp | |
+| `updated_at` | timestamp | |
+
+> **Design decisions**: Single caretaker per account. Private anchors owned by exactly one account. Scheduling confirmations always enabled (no toggle). Patient info stored as flat fields.
+
 ## Repository Structure
 
 ```
