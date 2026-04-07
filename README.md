@@ -8,6 +8,7 @@ A tracking and assistance system for dementia patients.
 |---|---|---|
 | **Backend** | `backend/` | Central hub: APIs, database, event bus, calendar sync, deterministic rules. All subsystems go through here. |
 | **Executive Agent** | `executive/` | Agentic orchestrator that coordinates between subsystems |
+| **Memory** | `memory/` | Long-term knowledge store and semantic retrieval for patient context |
 | **MoZo** | `mozo/` | Tag-anchor proximity monitoring for patient location |
 | **Scheduling** | `scheduling/` | Scheduling decision tool used by the executive agent |
 | **Transcription** | `transcription/` | 24/7 audio transcription with speaker diarization |

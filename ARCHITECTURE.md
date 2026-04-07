@@ -38,7 +38,14 @@ A system designed to track and assist dementia patients.
   - How subsystems report events to the executive (event bus, polling, direct calls)
   - Action space — what can the executive actually *do* in response to events
 
-### 5. Backend
+### 5. Memory (Storage & Retrieval)
+- **Directory**: `memory/`
+- **Purpose**: Long-term knowledge store for patient context, conversation history, and extracted information
+- **How it works**: Receives structured data from the transcription pipeline and executive agent. Supports storage and semantic retrieval so the executive agent can query relevant context when making decisions.
+- **Key concepts**: Memory ingestion, semantic search/retrieval, patient context over time
+- **Relationship**: Written to by `transcription/` and `executive/`, queried by `executive/`
+
+### 6. Backend
 - **Directory**: `backend/`
 - **Purpose**: Central hub — all subsystems communicate through the backend. Owns APIs, database, event routing, calendar sync, and deterministic rules.
 - **Submodules**:
@@ -50,7 +57,7 @@ A system designed to track and assist dementia patients.
   - `devices/` — MoZo anchor/tag registry, associations, signal history. Anchors have a visibility model: public (visible to all) or private (scoped to specific accounts).
   - `events/` — event bus / message routing between subsystems
   - `rules/` — deterministic routing logic (e.g., MoZo threshold → alert)
-  - `notifications/` — alert delivery to caregivers (push, SMS, email — TBD)
+  - `notifications/` — email-based communication with caregivers/patients. Two modes: one-way alerts (e.g., MoZo departure) and interactive confirmations (e.g., "approve this scheduling change?")
 - **Role**: Single source of truth. MoZo, transcription, and the executive agent all read/write through backend APIs. Calendars are added and synced here.
 
 ## Repository Structure
@@ -79,6 +86,7 @@ halo_system/
 │   ├── ingestion/
 │   ├── asr/
 │   └── diarization/
+├── memory/
 ├── scheduling/
 └── shared/
 ```
