@@ -45,7 +45,13 @@ A system designed to track and assist dementia patients.
 - **Key concepts**: Memory ingestion, semantic search/retrieval, patient context over time
 - **Relationship**: Written to by `transcription/` and `executive/`, queried by `executive/`
 
-### 6. Backend
+### 6. Frontend (Admin Browser)
+- **Directory**: `frontend/`
+- **Purpose**: Bare-bones read-only UI for browsing backend tables. No auth. Internal/debug use.
+- **Pages**: Accounts, Anchors, Tags, Calendars, Notification Preferences — each as a table view with detail pages
+- **Talks to**: Backend REST API
+
+### 7. Backend
 - **Directory**: `backend/`
 - **Purpose**: Central hub — all subsystems communicate through the backend. Owns APIs, database, event routing, calendar sync, and deterministic rules.
 - **Submodules**:
@@ -157,6 +163,7 @@ halo_system/
 │   ├── ingestion/
 │   ├── asr/
 │   └── diarization/
+├── frontend/
 ├── memory/
 ├── scheduling/
 └── shared/
