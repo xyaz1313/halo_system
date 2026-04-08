@@ -42,9 +42,8 @@ Implement the Account SQLModel table, all 6 service functions per spec, and the 
 - [ ] Model registered in `backend/models.py`
 
 ## Done summary
-TBD
-
+Implemented Account SQLModel table with all fields per spec, 6 service functions (create, get, get_by_email, list, update, delete), and CRUD API routes at /api/v1/accounts. Includes email uniqueness at DB and service levels, non-nullable field validation on PATCH, and proper IntegrityError handling.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 4ad0ee7, 053204c, 713c047, 0721152
+- Tests: python3 inline acceptance tests: create 201, duplicate 409, get 200, list 200, patch 200, delete 204, not-found 404, update-dup-email 409, null-field 422
 - PRs:

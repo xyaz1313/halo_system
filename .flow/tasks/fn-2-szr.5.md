@@ -45,8 +45,7 @@ Implement the in-process event bus (publish/subscribe/unsubscribe) with reset ca
 - [ ] Admin routes registered at `/api/v1/admin/*`
 
 ## Done summary
-TBD
-
+- Task completed
 ## Evidence
 - Commits:
 - Tests:

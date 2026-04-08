@@ -44,9 +44,8 @@ Implement Anchor, Tag, and AnchorTagAssociation models with visibility rules and
 - [ ] Models registered in `backend/models.py`
 
 ## Done summary
-TBD
-
+Implemented Anchor, Tag, and AnchorTagAssociation models with visibility/owner coupling, typed exception-raising service functions, and API routes at /api/v1/anchors and /api/v1/tags. Fixed BaseModel sa_column sharing bug for SQLModel 0.0.x by adding column factory helpers.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 4892bde, 6ae6558
+- Tests: python3 -c 'smoke test all device service functions'
 - PRs:

@@ -45,9 +45,8 @@ Implement Calendar and NotificationPreference models with their service function
 - [ ] Models registered in `backend/models.py`
 
 ## Done summary
-TBD
-
+Implemented Calendar and NotificationPreference models, services, and API routes. Calendar enforces immutability on provider/external_calendar_id with a patchable fields allowlist. NotificationPreference validates alert_types against known set, auto-includes schedule_confirmation, deduplicates, and guards against null values.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 3d262cb, 223eab1
+- Tests: python3 -c 'import backend.models; ...' (model import verification), python3 -c '...' (alert_types normalization tests), python3 -c '...' (JSON round-trip + immutability + patchable fields tests)
 - PRs:

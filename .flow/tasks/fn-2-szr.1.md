@@ -48,9 +48,8 @@ Create the Python project structure, declare all dependencies, define the base S
 - [ ] All submodule `__init__.py` files exist
 
 ## Done summary
-TBD
-
+Scaffolded Python backend project with pyproject.toml, BaseModel (String(36) UUID, DateTime timestamps with server_default), typed exceptions, DB engine with SQLite FK pragma, central model registry, Alembic configuration, and FastAPI app with global exception handlers.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 102ba4a5507d99cc10a1ecabef4450157f41ff55
+- Tests: pip install -e backend/.[dev], python -c 'from backend.core.models import BaseModel', python -c 'from backend.core.exceptions import ...', python -c 'PRAGMA foreign_keys check', alembic revision --autogenerate, alembic upgrade head, uvicorn backend.main:app (startup verified), TestClient exception handler verification
 - PRs:

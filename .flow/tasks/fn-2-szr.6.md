@@ -57,9 +57,8 @@ Write the full pytest test suite covering all three layers: model/service tests,
 - [ ] All tests use in-memory SQLite with StaticPool and foreign_keys=ON
 
 ## Done summary
-TBD
-
+Comprehensive pytest test suite covering all three layers (model/service, API endpoint, admin routes) with 129 tests. Includes cascade delete verification, event bus tests, and enforces calendar immutability at the API layer via Pydantic extra='forbid'.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: a76904f, b673c71
+- Tests: python3 -m pytest backend/tests/ -v
 - PRs:
