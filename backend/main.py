@@ -1,9 +1,11 @@
 """FastAPI application entry point with global exception handlers."""
 
+import pathlib
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from backend.core.exceptions import (
     AccessDeniedError,
@@ -73,3 +75,17 @@ app.include_router(notifications_router, prefix="/api/v1")
 from backend.api.admin import router as admin_router
 
 app.include_router(admin_router, prefix="/api/v1")
+
+# ---------------------------------------------------------------------------
+# Root redirect and static file serving
+# ---------------------------------------------------------------------------
+
+_FRONTEND_DIR = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "static"
+
+
+@app.get("/")
+async def _root_redirect():
+    return RedirectResponse(url="/static/index.html")
+
+
+app.mount("/static", StaticFiles(directory=str(_FRONTEND_DIR)), name="static")

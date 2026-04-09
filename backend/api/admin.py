@@ -23,31 +23,34 @@ router = APIRouter(prefix="/admin", tags=["admin"])
 DBSession = Annotated[Session, Depends(get_db)]
 
 
+_ADMIN_LIMIT = 10_000
+
+
 @router.get("/accounts")
 def dump_accounts(session: DBSession):
-    return session.exec(select(Account)).all()
+    return session.exec(select(Account).limit(_ADMIN_LIMIT)).all()
 
 
 @router.get("/anchors")
 def dump_anchors(session: DBSession):
-    return session.exec(select(Anchor)).all()
+    return session.exec(select(Anchor).limit(_ADMIN_LIMIT)).all()
 
 
 @router.get("/tags")
 def dump_tags(session: DBSession):
-    return session.exec(select(Tag)).all()
+    return session.exec(select(Tag).limit(_ADMIN_LIMIT)).all()
 
 
 @router.get("/associations")
 def dump_associations(session: DBSession):
-    return session.exec(select(AnchorTagAssociation)).all()
+    return session.exec(select(AnchorTagAssociation).limit(_ADMIN_LIMIT)).all()
 
 
 @router.get("/calendars")
 def dump_calendars(session: DBSession):
-    return session.exec(select(Calendar)).all()
+    return session.exec(select(Calendar).limit(_ADMIN_LIMIT)).all()
 
 
 @router.get("/preferences")
 def dump_preferences(session: DBSession):
-    return session.exec(select(NotificationPreference)).all()
+    return session.exec(select(NotificationPreference).limit(_ADMIN_LIMIT)).all()

@@ -46,9 +46,8 @@ Write Playwright browser tests for the frontend admin UI. Tests run against Fast
 - [ ] Active nav link sets `aria-current="page"` correctly per route
 
 ## Done summary
-TBD
-
+Added 48 Playwright browser tests covering smoke (route loading, navbar, navigation, aria-current), data display (endpoint fetch verification, column headers, row data, empty state, null rendering, array rendering), and error handling (500 response, network abort) for the frontend admin UI. Tests use Playwright route interception to mock all admin API responses with deterministic fixtures.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 8c54c20332d1798f110985035d048c1cdd6a838f
+- Tests: cd frontend && npx playwright test
 - PRs:

@@ -62,9 +62,8 @@ Set up the complete frontend as a vanilla JS application served as static files 
 - [ ] No build step required, files are plain HTML/CSS/JS
 
 ## Done summary
-TBD
-
+Added complete frontend admin UI scaffolding: index.html with hash-based routing for 6 table views (accounts, anchors, tags, associations, calendars, preferences), ES module JS files (app.js router, api.js fetch wrapper, table.js generic renderer, columns.js definitions), vendored Pico CSS, and FastAPI StaticFiles mount at /static with root redirect.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: ed47a8ea0c55c15b4d827c373fd51712231709ba
+- Tests: python3 -m pytest backend/tests/ -x -q (137 passed), python3 -c 'from backend.main import app' (import check), FastAPI TestClient verification of static serving and root redirect
 - PRs:
