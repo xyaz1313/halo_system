@@ -45,9 +45,8 @@ Create the docker-compose file for dev, convenience shell scripts for bare-metal
 - [ ] All existing tests still pass
 
 ## Done summary
-TBD
-
+Added docker-compose.yml (SQLite + hot-reload + named halo_data volume for DB persistence), bare-metal scripts/dev.sh (now sources .env with caller-env-wins precedence) and scripts/docker-dev.sh one-command launcher, .env.example documenting DATABASE_URL, plus Getting Started sections in README.md and backend/README.md. Codex impl-review: SHIP after one NEEDS_WORK round that fixed .env wiring in dev.sh.
 ## Evidence
-- Commits:
-- Tests:
+- Commits: 1558884, 1ed528b97dc99ecfdc3ecb97f5450ef0ca5c52db
+- Tests: pytest backend/tests/ -q (137 passed), bash -n scripts/dev.sh scripts/docker-dev.sh, docker compose config --quiet
 - PRs:
