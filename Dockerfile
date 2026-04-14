@@ -20,20 +20,18 @@ WORKDIR /app
 # dep needs a C toolchain, add `build-essential` here with a matching
 # apt-get purge in the same RUN layer.
 
-# Copy just the package metadata first so `pip install` can be cached
-# across source edits. `where = [".."]` in backend/pyproject.toml means
-# setuptools needs the `backend/` directory itself at install time, so we
-# copy the whole backend tree here. The source is bind-mounted over this
-# in docker-compose, but we keep it so `docker build` alone produces a
-# runnable image.
-COPY backend/ ./backend/
-
-# Editable install from the repo root — matches the layout the project
-# already uses in development.
+# Copy just the package metadata first so the heavy `pip install` layer
+# is cached across source edits. An editable install doesn't actually
+# need the source tree present at install time — pip writes a .pth entry
+# pointing at wherever the package lives, so we can stage pyproject.toml
+# alone, install, and then bring in the source.
+COPY backend/pyproject.toml ./backend/pyproject.toml
 RUN pip install -e "backend/.[dev]"
 
-# Copy the rest of the repo (frontend static files, scripts, etc.). In
-# compose this is overlaid by a bind-mount for hot reload.
+# Now the source. The compose file bind-mounts the repo over /app for
+# hot reload, but we still want a runnable image from `docker build`
+# alone (e.g. for one-shot runs, CI, or smoke tests).
+COPY backend/ ./backend/
 COPY . .
 
 # Ensure the prestart entrypoint is executable even if the host lost the

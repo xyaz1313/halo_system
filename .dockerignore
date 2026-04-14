@@ -13,10 +13,13 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Virtualenvs
+# Virtualenvs — cover nested ones too (e.g. backend/.venv/)
 .venv/
 venv/
 env/
+**/.venv/
+**/venv/
+**/env/
 
 # Databases / local data (never bake a dev DB into the image)
 *.db
