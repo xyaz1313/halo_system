@@ -52,4 +52,6 @@ This installs the backend in editable mode, runs `alembic upgrade head`, and sta
 
 ### Environment variables
 
-Copy `.env.example` to `.env` to override defaults. The main knob is `DATABASE_URL`; the Docker Compose file sets it to a path on the named volume, so you usually don't need to touch it unless you're running bare metal against a non-default DB.
+Copy `.env.example` to `.env` to override defaults for bare-metal runs. `scripts/dev.sh` sources `.env` automatically before invoking Alembic and Uvicorn, so variables defined there take effect (unless already exported in your shell, which wins).
+
+The main knob is `DATABASE_URL`. Note that the Docker Compose service sets `DATABASE_URL` explicitly on the `app` container (pointing at the named volume), so `.env` values are **not** used inside the container by design — overriding the DB URL there would bypass the persistent volume. If you need per-developer Compose overrides, use a `docker-compose.override.yml`.
