@@ -1,0 +1,32 @@
+# Dev Docker Compose: single `app` service with hot reload and a
+# persistent SQLite volume. Production compose (Postgres, non-root
+# user, gunicorn workers, healthchecks) is intentionally deferred.
+
+services:
+  app:
+    build: .
+    # Bind-mount the whole repo over /app so uvicorn --reload inside
+    # the container sees host edits. Combined with scripts/prestart.sh,
+    # which scopes --reload-dir to backend/ and frontend/, this keeps
+    # the reload loop cheap even with node_modules on disk.
+    volumes:
+      - .:/app
+      # Named volume for the SQLite DB file. If this were a plain bind
+      # mount the DB would either (a) land under the repo bind-mount
+      # and get clobbered on every developer edit, or (b) live only
+      # inside the ephemeral container layer and die on `down`. A
+      # named volume survives `down` + `up --build` which is the whole
+      # point of having persistence here.
+      - halo_data:/app/data
+    ports:
+      - "8000:8000"
+    environment:
+      # Four slashes = absolute path for SQLAlchemy's SQLite URL
+      # (scheme + `//` + `/absolute/path`). Points at the named
+      # volume so the DB survives container rebuilds.
+      DATABASE_URL: sqlite:////app/data/halo.db
+
+volumes:
+  # Declared empty — Docker manages the lifecycle. Remove with
+  # `docker compose down -v` if you want a clean DB.
+  halo_data: {}

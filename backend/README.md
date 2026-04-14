@@ -138,3 +138,28 @@ cd backend && alembic revision --autogenerate -m "description"
 # Apply migrations
 cd backend && alembic upgrade head
 ```
+
+## Running with Docker
+
+The repo root ships a `Dockerfile` and `docker-compose.yml` that run the backend (plus frontend static files) in a single container with SQLite and hot reload. See the repo-root [README](../README.md#getting-started) for the full walkthrough; the TL;DR:
+
+```bash
+# From the repo root
+./scripts/docker-dev.sh            # docker compose up --build
+
+# Run the test suite inside the container
+docker compose exec app pytest backend/tests/ -v
+
+# Tail logs / restart
+docker compose logs -f app
+docker compose restart app
+
+# Wipe the SQLite volume (destroys all data)
+docker compose down -v
+```
+
+Notes:
+
+- Migrations run automatically on container start via `scripts/prestart.sh` (`alembic upgrade head`). A bad migration will stop the container from coming up — intentional, to fail fast on schema drift.
+- The container bind-mounts the repo at `/app`, so editing any Python file under `backend/` triggers a `uvicorn --reload` restart without a rebuild.
+- The SQLite DB file lives at `/app/data/halo.db` on a named volume (`halo_data`), not inside the bind-mounted repo. This is why it survives `docker compose down`.
