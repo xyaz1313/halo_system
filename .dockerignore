@@ -1,0 +1,57 @@
+# Keep the build context small and the image lean.
+# Anything listed here is NOT sent to the Docker daemon during `docker build`.
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Databases / local data (never bake a dev DB into the image)
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# Node / frontend tooling
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Test output
+test-results/
+playwright-report/
+.playwright/
+
+# VCS and editor cruft
+.git/
+.gitignore
+.gitattributes
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Flow / agent plumbing — not needed in the runtime image
+.flow/
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# Logs and scratch
+*.log
+logs/
+tmp/
